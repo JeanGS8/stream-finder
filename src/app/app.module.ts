@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy } from '@angular/router';
+import { RouteReuseStrategy, RouterLink } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { TemplatePageModule } from './template/template.module';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    RouterLink,
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule

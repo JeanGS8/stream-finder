@@ -8,6 +8,8 @@ import { HomeModule } from './home/home.module';
 import { AltaModule } from './alta/alta.module';
 import { ProcurarModule } from './procurar/procurar.module';
 import { ListaModule } from './lista/lista.module';
+import { LoginComponent } from './login/login.component';
+import { LoginModule } from './login/login.module';
 
 const routes: Routes = [
   {
@@ -30,6 +32,10 @@ const routes: Routes = [
   {
     path: 'lista',
     component: ListaComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   }
 ];
 
@@ -39,7 +45,8 @@ const routes: Routes = [
     HomeModule,
     AltaModule,
     ProcurarModule,
-    ListaModule
+    ListaModule,
+    LoginModule
   ],
   exports: [RouterModule]
 })

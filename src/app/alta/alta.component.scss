@@ -1,0 +1,22 @@
+.card{
+  display: flex;
+  max-height: 150px;
+
+  
+  img{
+    width: 150px;
+    height: 150px;
+  }
+  
+  div{
+    display: flex;
+    flex-direction: column;
+    
+    .title{
+      font-size: 20px;
+    }
+    .conteudo{
+      font-size: 15px;
+    }
+  }
+}

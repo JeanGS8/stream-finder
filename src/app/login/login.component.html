@@ -1,0 +1,17 @@
+<ion-content color="primary">
+  <div class="content">
+    
+    <ion-item class="input" color="secondary">
+      <ion-input placeholder="Usuário" type="text" [(ngModel)]="username"></ion-input>
+    </ion-item>
+    
+    <ion-item class="input" color="secondary">
+      <ion-input placeholder="senha" type="password" [(ngModel)]="password"></ion-input>
+    </ion-item>
+
+    <p>Ainda não tem uma conta? <a href="">Cadastre-se</a></p>
+    
+    <ion-button color="tertiary" class="btn" expand="block" (click)="login()">Entrar</ion-button>
+
+  </div>
+</ion-content>

@@ -1,27 +1,28 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="secondary">
+    
     <ion-title>
       <div class="header">
-        <ion-icon class="icon" name="play-circle" />
-        <span>StreamFinder</span>
+        <ion-icon class="icon" name="play-circle"></ion-icon>
+        <span class="title">StreamFinder</span>
       </div>
     </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button class="perfil" routerLink="/login" routerLinkActive="selected">
+        <ion-icon name="person"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
-<ion-content color="secondary">
-  <router-outlet></router-outlet>
-</ion-content>
-
-<ion-footer>
-  <ion-toolbar>
-    <ion-title>Footer</ion-title>
-  </ion-toolbar>
-</ion-footer>
-
+<ion-app>
+  <ion-router-outlet></ion-router-outlet>
+</ion-app>
 
 <ion-tabs>
-  <ion-tab-bar slot="bottom" color="primary">
+  <ion-tab-bar slot="bottom" color="secondary">
     <ion-tab-button tab="home" routerLink="/home" routerLinkActive="selected">
       <ion-icon name="grid"></ion-icon>
       Início

@@ -4,19 +4,13 @@
     <ion-card
       class="card"
       color="dark"
+      *ngFor="let i of getRange(1, 50)"
     >
       <img alt="União Flasco" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1DmNe-EKS17OH4z_T4iFJzhgKLXJTZvTBhj3ELnvORQ&s" />
 
-      <div>
-        <ion-card-header>
-          <ion-card-title class="title">
-            União Flasco
-          </ion-card-title>
-        </ion-card-header>
-        <ion-card-content class="conteudo">
-          a nova ordem mundial
-        </ion-card-content>
-      </div>
+      <ion-card-title class="title">
+        União Flasco
+      </ion-card-title>
     </ion-card>
 
   </div>

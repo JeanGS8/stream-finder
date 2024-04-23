@@ -1,6 +1,18 @@
-.content{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+h2{
+  font-size: 30px;
+  padding: 12px 0 10px 10px;
+}
+img{
+  border-radius: 8px;
+  width: 157px;
+  height: 235px;
+}
+
+swiper-slide{
+  &:first-child{
+    margin-left: 13px;
+  }
+  &:last-child{
+    padding-right: 26px;
+  }
 }

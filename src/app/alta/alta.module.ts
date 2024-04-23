@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { AltaComponent } from './alta.component';
 import { IonicModule } from '@ionic/angular';
 
-
-
 @NgModule({
   declarations: [AltaComponent],
   imports: [

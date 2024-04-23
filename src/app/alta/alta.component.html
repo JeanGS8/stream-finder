@@ -1,17 +1,26 @@
 <ion-content color="primary">
-  <div class="content">
+  <ion-card class="card" color="dark" *ngFor="let item of movies">
+    <ion-grid>
+      <ion-row>
+        
+        <ion-col size="4">
+          <img src="{{'https://image.tmdb.org/t/p' + '/w500' + item.poster_path }}"/>
+        </ion-col>
 
-    <ion-card
-      class="card"
-      color="dark"
-      *ngFor="let i of getRange(1, 50)"
-    >
-      <img alt="União Flasco" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1DmNe-EKS17OH4z_T4iFJzhgKLXJTZvTBhj3ELnvORQ&s" />
+        <ion-col size="8">
+          <ion-card-header>
+            <ion-card-title>{{item.title}}</ion-card-title>
+            {{item.release_date | date: 'y'}}
+          </ion-card-header>
 
-      <ion-card-title class="title">
-        União Flasco
-      </ion-card-title>
-    </ion-card>
+          <ion-card-content>
+            <span>
+              {{item.overview.slice(0,70)}}...
+            </span>
+          </ion-card-content>
+        </ion-col>
 
-  </div>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
 </ion-content>

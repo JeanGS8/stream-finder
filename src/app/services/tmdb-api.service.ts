@@ -22,6 +22,12 @@ export class TmdbAPIService {
 
   constructor(private http: HttpClient) { }
 
+  getSearchMovies(name: string, page: number): Observable<apiResult> {
+    return this.http.get<apiResult>(
+      `https://api.themoviedb.org/3/search/movie?query=${name}&include_adult=false&language=pt-BR&api_key=dadc0c005ef5db978255b26bb089a811&page=${page}`
+    );
+  }
+  
   getPopularMovies(page: number): Observable<apiResult> {
     return this.http.get<apiResult>(
       `https://api.themoviedb.org/3/movie/popular?language=pt-BR&api_key=dadc0c005ef5db978255b26bb089a811&page=${page}`

@@ -10,6 +10,8 @@ import { ProcurarModule } from './procurar/procurar.module';
 import { ListaModule } from './lista/lista.module';
 import { LoginComponent } from './login/login.component';
 import { LoginModule } from './login/login.module';
+import { DadosComponent } from './dados/dados.component';
+import { DadosModule } from './dados/dados.module';
 
 const routes: Routes = [
   {
@@ -36,6 +38,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'dados/:id',
+    component: DadosComponent
   }
 ];
 
@@ -46,7 +52,8 @@ const routes: Routes = [
     AltaModule,
     ProcurarModule,
     ListaModule,
-    LoginModule
+    LoginModule,
+    DadosModule
   ],
   exports: [RouterModule]
 })

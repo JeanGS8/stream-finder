@@ -1,5 +1,6 @@
 import { Component, OnInit, } from '@angular/core';
 import { TmdbAPIService } from '../services/tmdb-api.service';
+import { Router } from '@angular/router';
 
 
 @Component({

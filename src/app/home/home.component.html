@@ -4,8 +4,13 @@
   </ion-text>
 
   <swiper-container [modules]="swiperModules" [slidesPerView]="2.5" [spaceBetween]="13">
-    <swiper-slide *ngFor="let item of actionMovies">
-      <img src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}" />
+    <swiper-slide
+      *ngFor="let item of actionMovies"
+      routerLink="{{'/dados/' + item.id}}"
+    >
+      <img 
+        src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}"
+      />
     </swiper-slide>
   </swiper-container>
 
@@ -14,8 +19,13 @@
   </ion-text>
 
   <swiper-container [modules]="swiperModules" [slidesPerView]="2.5" [spaceBetween]="13">
-    <swiper-slide *ngFor="let item of adventureMovies">
-      <img src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}" />
+    <swiper-slide
+      *ngFor="let item of adventureMovies"
+      routerLink="{{'/dados/' + item.id}}"
+    >
+      <img 
+        src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}"
+      />
     </swiper-slide>
   </swiper-container>
 
@@ -24,8 +34,13 @@
   </ion-text>
 
   <swiper-container [modules]="swiperModules" [slidesPerView]="2.5" [spaceBetween]="13">
-    <swiper-slide *ngFor="let item of animationMovies">
-      <img src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}" />
+    <swiper-slide
+      *ngFor="let item of animationMovies"
+      routerLink="{{'/dados/' + item.id}}"
+    >
+      <img 
+        src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}"
+      />
     </swiper-slide>
   </swiper-container>
 
@@ -34,8 +49,13 @@
   </ion-text>
 
   <swiper-container [modules]="swiperModules" [slidesPerView]="2.5" [spaceBetween]="13">
-    <swiper-slide *ngFor="let item of comedyMovies">
-      <img src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}" />
+    <swiper-slide
+      *ngFor="let item of comedyMovies"
+      routerLink="{{'/dados/' + item.id}}"
+    >
+      <img 
+        src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}"
+      />
     </swiper-slide>
   </swiper-container>
 
@@ -44,8 +64,13 @@
   </ion-text>
 
   <swiper-container [modules]="swiperModules" [slidesPerView]="2.5" [spaceBetween]="13">
-    <swiper-slide *ngFor="let item of crimeMovies">
-      <img src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}" />
+    <swiper-slide
+      *ngFor="let item of crimeMovies"
+      routerLink="{{'/dados/' + item.id}}"
+    >
+      <img 
+        src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}"
+      />
     </swiper-slide>
   </swiper-container>
 
@@ -55,8 +80,13 @@
   </ion-text>
 
   <swiper-container [modules]="swiperModules" [slidesPerView]="2.5" [spaceBetween]="13">
-    <swiper-slide *ngFor="let item of dramaMovies">
-      <img src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}" />
+    <swiper-slide
+      *ngFor="let item of dramaMovies"
+      routerLink="{{'/dados/' + item.id}}"
+    >
+      <img 
+        src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}"
+      />
     </swiper-slide>
   </swiper-container>
 
@@ -65,8 +95,13 @@
   </ion-text>
 
   <swiper-container [modules]="swiperModules" [slidesPerView]="2.5" [spaceBetween]="13">
-    <swiper-slide *ngFor="let item of familyMovies">
-      <img src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}" />
+    <swiper-slide
+      *ngFor="let item of familyMovies"
+      routerLink="{{'/dados/' + item.id}}"  
+    >
+      <img 
+        src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}"
+      />
     </swiper-slide>
   </swiper-container>
 
@@ -75,8 +110,13 @@
   </ion-text>
 
   <swiper-container [modules]="swiperModules" [slidesPerView]="2.5" [spaceBetween]="13">
-    <swiper-slide *ngFor="let item of fantasyMovies">
-      <img src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}" />
+    <swiper-slide
+      *ngFor="let item of fantasyMovies"
+      routerLink="{{'/dados/' + item.id}}"  
+    >
+      <img 
+        src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}"
+      />
     </swiper-slide>
   </swiper-container>
 
@@ -85,8 +125,13 @@
   </ion-text>
 
   <swiper-container [modules]="swiperModules" [slidesPerView]="2.5" [spaceBetween]="13">
-    <swiper-slide *ngFor="let item of historyMovies">
-      <img src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}" />
+    <swiper-slide
+      *ngFor="let item of historyMovies"
+      routerLink="{{'/dados/' + item.id}}"
+    >
+      <img 
+        src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}"
+      />
     </swiper-slide>
   </swiper-container>
 
@@ -95,8 +140,13 @@
   </ion-text>
 
   <swiper-container [modules]="swiperModules" [slidesPerView]="2.5" [spaceBetween]="13">
-    <swiper-slide *ngFor="let item of horrorMovies">
-      <img src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}" />
+    <swiper-slide
+      *ngFor="let item of horrorMovies"
+      routerLink="{{'/dados/' + item.id}}"  
+    >
+      <img 
+        src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}"
+      />
     </swiper-slide>
   </swiper-container>
 
@@ -105,8 +155,13 @@
   </ion-text>
 
   <swiper-container [modules]="swiperModules" [slidesPerView]="2.5" [spaceBetween]="13">
-    <swiper-slide *ngFor="let item of musicMovies">
-      <img src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}" />
+    <swiper-slide
+      *ngFor="let item of musicMovies"
+      routerLink="{{'/dados/' + item.id}}"  
+    >
+      <img 
+        src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}"
+      />
     </swiper-slide>
   </swiper-container>
 
@@ -115,8 +170,13 @@
   </ion-text>
 
   <swiper-container [modules]="swiperModules" [slidesPerView]="2.5" [spaceBetween]="13">
-    <swiper-slide *ngFor="let item of mysteryMovies">
-      <img src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}" />
+    <swiper-slide
+      *ngFor="let item of mysteryMovies"
+      routerLink="{{'/dados/' + item.id}}"  
+    >
+      <img 
+        src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}"
+      />
     </swiper-slide>
   </swiper-container>
 
@@ -125,8 +185,13 @@
   </ion-text>
 
   <swiper-container [modules]="swiperModules" [slidesPerView]="2.5" [spaceBetween]="13">
-    <swiper-slide *ngFor="let item of romanceMovies">
-      <img src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}" />
+    <swiper-slide
+      *ngFor="let item of romanceMovies"
+      routerLink="{{'/dados/' + item.id}}"
+    >
+      <img 
+        src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}"
+      />
     </swiper-slide>
   </swiper-container>
 
@@ -135,8 +200,13 @@
   </ion-text>
 
   <swiper-container [modules]="swiperModules" [slidesPerView]="2.5" [spaceBetween]="13">
-    <swiper-slide *ngFor="let item of scienceFictionMovies">
-      <img src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}" />
+    <swiper-slide
+      *ngFor="let item of scienceFictionMovies"
+      routerLink="{{'/dados/' + item.id}}"
+    >
+      <img 
+        src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}"
+      />
     </swiper-slide>
   </swiper-container>
 
@@ -145,8 +215,13 @@
   </ion-text>
 
   <swiper-container [modules]="swiperModules" [slidesPerView]="2.5" [spaceBetween]="13">
-    <swiper-slide *ngFor="let item of thrillerMovies">
-      <img src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}" />
+    <swiper-slide
+      *ngFor="let item of thrillerMovies"
+      routerLink="{{'/dados/' + item.id}}"  
+    >
+      <img 
+        src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}"
+      />
     </swiper-slide>
   </swiper-container>
 
@@ -155,8 +230,13 @@
   </ion-text>
 
   <swiper-container [modules]="swiperModules" [slidesPerView]="2.5" [spaceBetween]="13">
-    <swiper-slide *ngFor="let item of warMovies">
-      <img src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}" />
+    <swiper-slide
+      *ngFor="let item of warMovies"
+      routerLink="{{'/dados/' + item.id}}"  
+    >
+      <img 
+        src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}"
+      />
     </swiper-slide>
   </swiper-container>
 </ion-content>

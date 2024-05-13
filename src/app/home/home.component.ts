@@ -2,6 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { IonicSlides } from '@ionic/angular';
 import { TmdbAPIService } from '../services/tmdb-api.service';
 import { register } from 'swiper/element/bundle';
+import { Router } from '@angular/router';
 register();
 
 @Component({
@@ -37,7 +38,7 @@ export class HomeComponent  implements OnInit {
 
 
 
-  constructor(private tmdbAPI: TmdbAPIService) {
+  constructor(private tmdbAPI: TmdbAPIService, private router: Router) {
   }
 
   //Loop

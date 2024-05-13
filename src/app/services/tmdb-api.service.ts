@@ -1,8 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { forkJoin } from 'rxjs';
 
 
 export interface apiResult{
@@ -25,6 +24,61 @@ export class TmdbAPIService {
   getSearchMovies(name: string, page: number): Observable<apiResult> {
     return this.http.get<apiResult>(
       `https://api.themoviedb.org/3/search/movie?query=${name}&include_adult=false&language=pt-BR&api_key=dadc0c005ef5db978255b26bb089a811&page=${page}`
+    );
+  }
+  
+  getProviders(id: string): Observable<any> {
+    return this.http.get<apiResult>(
+      `https://api.themoviedb.org/3/movie/${id}/watch/providers`,
+      {
+        headers: new HttpHeaders({
+          'authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMmM5MzVmNDAxZTJhNDVlMDM3NjExNDMwODNkYWFmOSIsInN1YiI6IjY2M2Y4MjM5MTgwYjBkZDllOGI2MjA1YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.cnygjS1KEPLff4KyZyUGwGV3DSF7iN0PUYx_Oy50TSA'
+        })
+      }
+    );
+  }
+
+  getDetails(id: string): Observable<apiResult> {
+    return this.http.get<apiResult>(
+      `https://api.themoviedb.org/3/movie/${id}?language=pt-br`,
+      {
+        headers: new HttpHeaders({
+          'authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMmM5MzVmNDAxZTJhNDVlMDM3NjExNDMwODNkYWFmOSIsInN1YiI6IjY2M2Y4MjM5MTgwYjBkZDllOGI2MjA1YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.cnygjS1KEPLff4KyZyUGwGV3DSF7iN0PUYx_Oy50TSA'
+        })
+      }
+    );
+  }
+
+  getCredits(id: string): Observable<apiResult> {
+    return this.http.get<apiResult>(
+      `https://api.themoviedb.org/3/movie/${id}/credits?language=pt-br`,
+      {
+        headers: new HttpHeaders({
+          'authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMmM5MzVmNDAxZTJhNDVlMDM3NjExNDMwODNkYWFmOSIsInN1YiI6IjY2M2Y4MjM5MTgwYjBkZDllOGI2MjA1YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.cnygjS1KEPLff4KyZyUGwGV3DSF7iN0PUYx_Oy50TSA'
+        })
+      }
+    );
+  }
+
+  getVideo(id: string): Observable<apiResult> {
+    return this.http.get<apiResult>(
+      `https://api.themoviedb.org/3/movie/${id}/videos?language=pt-br`,
+      {
+        headers: new HttpHeaders({
+          'authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMmM5MzVmNDAxZTJhNDVlMDM3NjExNDMwODNkYWFmOSIsInN1YiI6IjY2M2Y4MjM5MTgwYjBkZDllOGI2MjA1YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.cnygjS1KEPLff4KyZyUGwGV3DSF7iN0PUYx_Oy50TSA'
+        })
+      }
+    );
+  }
+
+  getRecomendacao(id: string): Observable<apiResult> {
+    return this.http.get<apiResult>(
+      `https://api.themoviedb.org/3/movie/${id}/recommendations?language=pt-br&page=1`,
+      {
+        headers: new HttpHeaders({
+          'authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMmM5MzVmNDAxZTJhNDVlMDM3NjExNDMwODNkYWFmOSIsInN1YiI6IjY2M2Y4MjM5MTgwYjBkZDllOGI2MjA1YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.cnygjS1KEPLff4KyZyUGwGV3DSF7iN0PUYx_Oy50TSA'
+        })
+      }
     );
   }
   

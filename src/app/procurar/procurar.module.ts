@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ProcurarComponent } from './procurar.component';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 
 
@@ -11,7 +12,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     IonicModule,
     CommonModule,
-    FormsModule
+    FormsModule,
+    RouterLink
   ]
 })
 export class ProcurarModule { }

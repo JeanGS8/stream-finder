@@ -6,10 +6,10 @@
   <swiper-container [modules]="swiperModules" [slidesPerView]="2.5" [spaceBetween]="13">
     <swiper-slide
       *ngFor="let item of actionMovies"
-      routerLink="{{'/dados/' + item.id}}"
+      routerLink="{{'/dados/' + item?.id}}"
     >
       <img 
-        src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}"
+        src="{{'https://image.tmdb.org/t/p/w185' + item?.poster_path }}"
       />
     </swiper-slide>
   </swiper-container>
@@ -21,10 +21,10 @@
   <swiper-container [modules]="swiperModules" [slidesPerView]="2.5" [spaceBetween]="13">
     <swiper-slide
       *ngFor="let item of adventureMovies"
-      routerLink="{{'/dados/' + item.id}}"
+      routerLink="{{'/dados/' + item?.id}}"
     >
       <img 
-        src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}"
+        src="{{'https://image.tmdb.org/t/p/w185' + item?.poster_path }}"
       />
     </swiper-slide>
   </swiper-container>
@@ -36,10 +36,10 @@
   <swiper-container [modules]="swiperModules" [slidesPerView]="2.5" [spaceBetween]="13">
     <swiper-slide
       *ngFor="let item of animationMovies"
-      routerLink="{{'/dados/' + item.id}}"
+      routerLink="{{'/dados/' + item?.id}}"
     >
       <img 
-        src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}"
+        src="{{'https://image.tmdb.org/t/p/w185' + item?.poster_path }}"
       />
     </swiper-slide>
   </swiper-container>
@@ -51,10 +51,10 @@
   <swiper-container [modules]="swiperModules" [slidesPerView]="2.5" [spaceBetween]="13">
     <swiper-slide
       *ngFor="let item of comedyMovies"
-      routerLink="{{'/dados/' + item.id}}"
+      routerLink="{{'/dados/' + item?.id}}"
     >
       <img 
-        src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}"
+        src="{{'https://image.tmdb.org/t/p/w185' + item?.poster_path }}"
       />
     </swiper-slide>
   </swiper-container>
@@ -66,10 +66,10 @@
   <swiper-container [modules]="swiperModules" [slidesPerView]="2.5" [spaceBetween]="13">
     <swiper-slide
       *ngFor="let item of crimeMovies"
-      routerLink="{{'/dados/' + item.id}}"
+      routerLink="{{'/dados/' + item?.id}}"
     >
       <img 
-        src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}"
+        src="{{'https://image.tmdb.org/t/p/w185' + item?.poster_path }}"
       />
     </swiper-slide>
   </swiper-container>
@@ -82,10 +82,10 @@
   <swiper-container [modules]="swiperModules" [slidesPerView]="2.5" [spaceBetween]="13">
     <swiper-slide
       *ngFor="let item of dramaMovies"
-      routerLink="{{'/dados/' + item.id}}"
+      routerLink="{{'/dados/' + item?.id}}"
     >
       <img 
-        src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}"
+        src="{{'https://image.tmdb.org/t/p/w185' + item?.poster_path }}"
       />
     </swiper-slide>
   </swiper-container>
@@ -97,10 +97,10 @@
   <swiper-container [modules]="swiperModules" [slidesPerView]="2.5" [spaceBetween]="13">
     <swiper-slide
       *ngFor="let item of familyMovies"
-      routerLink="{{'/dados/' + item.id}}"  
+      routerLink="{{'/dados/' + item?.id}}"  
     >
       <img 
-        src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}"
+        src="{{'https://image.tmdb.org/t/p/w185' + item?.poster_path }}"
       />
     </swiper-slide>
   </swiper-container>
@@ -112,10 +112,10 @@
   <swiper-container [modules]="swiperModules" [slidesPerView]="2.5" [spaceBetween]="13">
     <swiper-slide
       *ngFor="let item of fantasyMovies"
-      routerLink="{{'/dados/' + item.id}}"  
+      routerLink="{{'/dados/' + item?.id}}"  
     >
       <img 
-        src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}"
+        src="{{'https://image.tmdb.org/t/p/w185' + item?.poster_path }}"
       />
     </swiper-slide>
   </swiper-container>
@@ -127,10 +127,10 @@
   <swiper-container [modules]="swiperModules" [slidesPerView]="2.5" [spaceBetween]="13">
     <swiper-slide
       *ngFor="let item of historyMovies"
-      routerLink="{{'/dados/' + item.id}}"
+      routerLink="{{'/dados/' + item?.id}}"
     >
       <img 
-        src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}"
+        src="{{'https://image.tmdb.org/t/p/w185' + item?.poster_path }}"
       />
     </swiper-slide>
   </swiper-container>
@@ -142,10 +142,10 @@
   <swiper-container [modules]="swiperModules" [slidesPerView]="2.5" [spaceBetween]="13">
     <swiper-slide
       *ngFor="let item of horrorMovies"
-      routerLink="{{'/dados/' + item.id}}"  
+      routerLink="{{'/dados/' + item?.id}}"  
     >
       <img 
-        src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}"
+        src="{{'https://image.tmdb.org/t/p/w185' + item?.poster_path }}"
       />
     </swiper-slide>
   </swiper-container>
@@ -157,10 +157,10 @@
   <swiper-container [modules]="swiperModules" [slidesPerView]="2.5" [spaceBetween]="13">
     <swiper-slide
       *ngFor="let item of musicMovies"
-      routerLink="{{'/dados/' + item.id}}"  
+      routerLink="{{'/dados/' + item?.id}}"  
     >
       <img 
-        src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}"
+        src="{{'https://image.tmdb.org/t/p/w185' + item?.poster_path }}"
       />
     </swiper-slide>
   </swiper-container>
@@ -172,10 +172,10 @@
   <swiper-container [modules]="swiperModules" [slidesPerView]="2.5" [spaceBetween]="13">
     <swiper-slide
       *ngFor="let item of mysteryMovies"
-      routerLink="{{'/dados/' + item.id}}"  
+      routerLink="{{'/dados/' + item?.id}}"  
     >
       <img 
-        src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}"
+        src="{{'https://image.tmdb.org/t/p/w185' + item?.poster_path }}"
       />
     </swiper-slide>
   </swiper-container>
@@ -187,10 +187,10 @@
   <swiper-container [modules]="swiperModules" [slidesPerView]="2.5" [spaceBetween]="13">
     <swiper-slide
       *ngFor="let item of romanceMovies"
-      routerLink="{{'/dados/' + item.id}}"
+      routerLink="{{'/dados/' + item?.id}}"
     >
       <img 
-        src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}"
+        src="{{'https://image.tmdb.org/t/p/w185' + item?.poster_path }}"
       />
     </swiper-slide>
   </swiper-container>
@@ -202,10 +202,10 @@
   <swiper-container [modules]="swiperModules" [slidesPerView]="2.5" [spaceBetween]="13">
     <swiper-slide
       *ngFor="let item of scienceFictionMovies"
-      routerLink="{{'/dados/' + item.id}}"
+      routerLink="{{'/dados/' + item?.id}}"
     >
       <img 
-        src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}"
+        src="{{'https://image.tmdb.org/t/p/w185' + item?.poster_path }}"
       />
     </swiper-slide>
   </swiper-container>
@@ -217,10 +217,10 @@
   <swiper-container [modules]="swiperModules" [slidesPerView]="2.5" [spaceBetween]="13">
     <swiper-slide
       *ngFor="let item of thrillerMovies"
-      routerLink="{{'/dados/' + item.id}}"  
+      routerLink="{{'/dados/' + item?.id}}"  
     >
       <img 
-        src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}"
+        src="{{'https://image.tmdb.org/t/p/w185' + item?.poster_path }}"
       />
     </swiper-slide>
   </swiper-container>
@@ -232,10 +232,10 @@
   <swiper-container [modules]="swiperModules" [slidesPerView]="2.5" [spaceBetween]="13">
     <swiper-slide
       *ngFor="let item of warMovies"
-      routerLink="{{'/dados/' + item.id}}"  
+      routerLink="{{'/dados/' + item?.id}}"  
     >
       <img 
-        src="{{'https://image.tmdb.org/t/p/w185' + item.poster_path }}"
+        src="{{'https://image.tmdb.org/t/p/w185' + item?.poster_path }}"
       />
     </swiper-slide>
   </swiper-container>

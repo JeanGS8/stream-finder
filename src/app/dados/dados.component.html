@@ -74,7 +74,7 @@
       <ion-col size="6" class="ion-text-start">
         <h2> Onde assistir: </h2>
       </ion-col>
-      <ion-col size="6" class="ion-text-end">
+      <ion-col *ngIf="video?.length > 0" size="6" class="ion-text-end">
         <a href="{{'https://www.youtube.com/watch?v=' + video}}" target="_blank">
           Assistir ao trailer <ion-icon name="play"></ion-icon>
         </a>
@@ -82,8 +82,8 @@
     </ion-row>
 
     <ion-row
-      *ngIf="stream?.BR"
-      class="list ion-justify-content-around"
+      *ngIf="stream?.BR.flatrate.length > 0"
+      class="list ion-justify-content-around ion-margin-horizontal"
     >
       <ion-col size="2" *ngFor="let provider of stream?.BR.flatrate">
         <img
@@ -114,14 +114,21 @@
         *ngFor="let ator of credits?.cast"
       >
         <img
+          *ngIf="ator?.profile_path != null"
           src="{{'https://image.tmdb.org/t/p/w185' + ator?.profile_path }}"
+          class="user"
         />
-        <h3 class="ion-text-center ion-padding-vertical">{{ator?.name}}</h3>
+        <img
+          *ngIf="ator?.profile_path == null"
+          src="assets/user.png"
+          class="not-user"
+        />
+        <h3 class="ion-text-center">{{ator?.name}}</h3>
       </swiper-slide>
     </swiper-container>
   </div>
 
-  <div class="swiper__recomendacao ion-padding-vertical ion-margin-vertical">
+  <div class="swiper__recomendacao ion-padding-vertical">
     <h2>Recomendações:</h2>
     <swiper-container
       [modules]="swiperModules"

@@ -9,6 +9,12 @@ img{
 }
 
 swiper-slide{
+
+  img{  
+    box-shadow: 2px 2px 5px black;
+    margin: 4px 0;
+  }
+  
   &:first-child{
     margin-left: 13px;
   }

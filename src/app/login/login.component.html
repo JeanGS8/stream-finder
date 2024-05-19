@@ -1,4 +1,4 @@
-<ion-content color="primary">
+<ion-content color="secondary">
   <div class="content">
 
     <div class="logo">
@@ -9,14 +9,15 @@
     <ion-item class="input" color="tertiary">
       <ion-input placeholder="Usuário" type="text" [(ngModel)]="username"></ion-input>
     </ion-item>
-    
+
     <ion-item class="input" color="tertiary">
-      <ion-input placeholder="senha" type="password" [(ngModel)]="password"></ion-input>
+      <ion-input placeholder="Senha" type="password" [(ngModel)]="password"></ion-input>
     </ion-item>
 
     <p>Ainda não tem uma conta? <a href="https://www.themoviedb.org/signup?language=pt-BR" target="_blank">Cadastre-se</a></p>
-    
-    <ion-button color="medium" class="btn" expand="block" (click)="login()">Entrar</ion-button>
 
+    <ion-button color="medium" class="btn" expand="block" (click)="createRequestToken()">Entrar</ion-button>
+
+    <div *ngIf="showError == true">Usuário ou senha inválido</div>
   </div>
 </ion-content>

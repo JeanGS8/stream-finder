@@ -104,16 +104,29 @@ export class TmdbAPIService {
         return results;
       })
     );
-
-
-    //Isso é outra coisa não usada
-    //isso pega o LINK de um filme, passando o ID. Então pode fazer uma parte mais detalhadas desse filmes
-    //  getMovieDetails(id: String)
-    //  {
-    //    return this.http.get(
-    //      `https://api.themoviedb.org/movie/${id}?api_key=${environment.apiKey}`)
-    //  }
-
-
-  }
+  }   
+    //Relacionado ao login: Pede um token
+    getRequestToken(): Observable<any> {
+      return this.http.get<any>(`https://api.themoviedb.org/3/authentication/token/new?api_key=dadc0c005ef5db978255b26bb089a811`);
+    }
+  
+    //valida o token e chama a sessão aq
+    validateRequestToken(username: string, password: string, requestToken: string): Observable<any> {
+      return this.http.post<any>(`https://api.themoviedb.org/3/authentication/token/validate_with_login?api_key=dadc0c005ef5db978255b26bb089a811`, {
+        username,
+        password,
+        request_token: requestToken
+      });
+    }
+    //chama a sessão
+    getSessionID(requestToken: string): Observable<any> {
+      return this.http.get<any>(`https://api.themoviedb.org/3/authentication/session/new?api_key=dadc0c005ef5db978255b26bb089a811&request_token=${requestToken}`);
+    }
+  
+    //pega a informação da conta(importante pegar a sessão)
+    getAccountInfo(sessionToken: String): Observable<any> {
+      return this.http.get<any>(`https://api.themoviedb.org/3/account?api_key=dadc0c005ef5db978255b26bb089a811&session_id=${sessionToken}`);
+  
+  
+    }
 }

@@ -1,21 +1,28 @@
 <ion-content color="primary">
-  <ion-card
-    class="card"
-    color="dark"
-  >
-    <img alt="União Flasco" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1DmNe-EKS17OH4z_T4iFJzhgKLXJTZvTBhj3ELnvORQ&s" />
+  <ion-card class="card" color="dark" *ngFor="let item of movies">
+    <ion-grid fluid>
+      <ion-row tab="dados" routerLink="/dados/{{item.id}}">
+        
+        <ion-col size="4" sizeSm="3" sizeMd="2">
+          <img src="{{'https://image.tmdb.org/t/p' + '/original' + item.poster_path }}"/>
+        </ion-col>
 
-    <div>
-      <ion-card-header>
-        <ion-card-title class="title">
-          União Flasco
-        </ion-card-title>
-      </ion-card-header>
-      <ion-card-content class="conteudo">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatum, similique minima? Exercitationem pariatur sunt quia explicabo dolorem veritatis beatae laboriosam, fugit molestias quibusdam placeat nobis illum natus! Temporibus, distinctio nam!
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis corrupti totam expedita maxime consequatur neque, suscipit magni, nihil ipsam vero vitae aspernatur. Praesentium molestias aliquid sed odio ea soluta consequatur.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis corrupti totam expedita maxime consequatur neque, suscipit magni, nihil ipsam vero vitae aspernatur. Praesentium molestias aliquid sed odio ea soluta consequatur.
-      </ion-card-content>
-    </div>
+        <ion-col size="8" sizeSm="9" sizeMd="10">
+          <ion-card-header>
+            <ion-card-title>{{item.title}}</ion-card-title>
+            <ion-card-title>{{item.release_date | date: 'y'}}</ion-card-title>
+          </ion-card-header>
+          
+          <ion-card-content>
+            <ion-icon name="bookmark"></ion-icon>
+            <ion-icon name="bookmark-outline"></ion-icon>
+            <p>
+              {{item.overview.slice(0,70)}}...
+            </p>
+          </ion-card-content>
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
   </ion-card>
 </ion-content>

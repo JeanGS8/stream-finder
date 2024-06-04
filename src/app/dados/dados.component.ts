@@ -39,21 +39,35 @@ export class DadosComponent  implements OnInit {
 
   formatarValor(valor: number){
     const partes = valor.toFixed(2).split('.');
-    return (valor > 0)? "$" + partes[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ',' + partes[1]: "Valor não informado";
+    return (valor > 0)? "US$ " + partes[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ',' + partes[1]: "Valor não informado";
   }
 
-  ngOnInit() {
-
+ ngOnInit() {
+   this.dadosInfo();
+  }
+  dadosInfo(){
     this.route.params.subscribe(params => {
-      
+
       const movieId = params ['id'];
+      //recomendacao
+      this.tmdbAPI.getRecomendacao(movieId).subscribe(res => {
+        this.recomendacao = res.results;
+        console.log("recomendacao: ");
+        console.log(res);
+      })
+      //nome dos atores
+      this.tmdbAPI.getCredits(movieId).subscribe(res => {
+        this.credits = res;
+        console.log("credits: ");
+        console.log(res);
+      })
 
       //dados dos filmes
       this.tmdbAPI.getDetails(movieId).subscribe(res => {
         this.details = res;
         console.log("Details: ");
         console.log(res);
-        
+
         this.data = this.details?.release_date.replace(/-/g, '/');
         this.duracao = this.formatarHoras(this.details?.runtime);
         this.orcamento = this.formatarValor(this.details?.budget);
@@ -62,30 +76,21 @@ export class DadosComponent  implements OnInit {
 
       //trailer do filme
       this.tmdbAPI.getVideo(movieId).subscribe(res => {
+
+        if(res.results[0] != undefined){
+        console.log("true");
         this.video = res?.results[0].key;
-      })
-      
+        }
+
+      });
+
+
       // onde assistir
       this.tmdbAPI.getProviders(movieId).subscribe(res => {
         this.stream = res.results;
-        console.log("Provider: ");
+        console.log("STREAM");
         console.log(res.results);
       });
-      
-      //nome dos atores
-      this.tmdbAPI.getCredits(movieId).subscribe(res => {
-        this.credits = res;
-        console.log("credits: ");
-        console.log(res);
-      })
-
-      //recomendacao
-      this.tmdbAPI.getRecomendacao(movieId).subscribe(res => {
-        this.recomendacao = res.results;
-        console.log("recomendacao: ");
-        console.log(res);
-      })
     })
   }
-
 }

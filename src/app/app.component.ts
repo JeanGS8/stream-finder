@@ -9,11 +9,12 @@ import { TmdbAPIService } from './services/tmdb-api.service';
 
 export class AppComponent implements OnInit {
   public sessionID: string = '';
-
+  public accountID: string = '';
 
   //Sempre pegar informação da conta
   ngOnInit() {
     this.getAccountDetails();
+    this.getAccountId();
   }
   constructor(private tmdbAPI: TmdbAPIService) {
     this.getSessionIDFromLocalStorage();
@@ -27,14 +28,30 @@ export class AppComponent implements OnInit {
 
   //pra pegar a informação da conta
   getAccountDetails() {
-    this.tmdbAPI.getAccountInfo(this.sessionID).subscribe(res => {
-      console.log(res);
-    })
+
+    if (this.sessionID.length > 0) {
+      this.tmdbAPI.getAccountInfo(this.sessionID).subscribe(res => {
+        console.log("account info:");
+        console.log(res);
+      })
+    }else{
+      console.log("Você não está logado")
+    }
+  }
+
+  getAccountId(){
+    if (this.sessionID.length > 0) {
+      this.tmdbAPI.getAccountInfo(this.sessionID).subscribe(res => {
+        this.accountID = res.id;
+        console.log("account id:" + this.accountID);
+        localStorage.setItem("accountID", this.accountID);
+      })
+
+    }
   }
   //logout Simples
   logout() {
     localStorage.removeItem('sessionID');
     window.location.reload();
   }
-
 }

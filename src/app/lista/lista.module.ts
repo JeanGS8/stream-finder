@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { ListaComponent } from './lista.component';
+import { RouterLink } from '@angular/router';
 
 
 
@@ -9,7 +10,8 @@ import { ListaComponent } from './lista.component';
   declarations: [ListaComponent],
   imports: [
     IonicModule,
-    CommonModule
+    CommonModule,
+    RouterLink
   ]
 })
 export class ListaModule { }

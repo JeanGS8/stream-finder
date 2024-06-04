@@ -1,3 +1,4 @@
+
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, forkJoin } from 'rxjs';
@@ -26,7 +27,7 @@ export class TmdbAPIService {
       `https://api.themoviedb.org/3/search/movie?query=${name}&include_adult=false&language=pt-BR&api_key=dadc0c005ef5db978255b26bb089a811&page=${page}`
     );
   }
-  
+
   getProviders(id: string): Observable<any> {
     return this.http.get<apiResult>(
       `https://api.themoviedb.org/3/movie/${id}/watch/providers`,
@@ -73,7 +74,7 @@ export class TmdbAPIService {
 
   getRecomendacao(id: string): Observable<apiResult> {
     return this.http.get<apiResult>(
-      `https://api.themoviedb.org/3/movie/${id}/recommendations?language=pt-br&page=1`,
+      `https://api.themoviedb.org/3/movie/${id}/recommendations?language=en-US&page=1`,
       {
         headers: new HttpHeaders({
           'authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMmM5MzVmNDAxZTJhNDVlMDM3NjExNDMwODNkYWFmOSIsInN1YiI6IjY2M2Y4MjM5MTgwYjBkZDllOGI2MjA1YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.cnygjS1KEPLff4KyZyUGwGV3DSF7iN0PUYx_Oy50TSA'
@@ -81,7 +82,7 @@ export class TmdbAPIService {
       }
     );
   }
-  
+
   getPopularMovies(page: number): Observable<apiResult> {
     return this.http.get<apiResult>(
       `https://api.themoviedb.org/3/movie/popular?language=pt-BR&api_key=dadc0c005ef5db978255b26bb089a811&page=${page}`
@@ -104,12 +105,12 @@ export class TmdbAPIService {
         return results;
       })
     );
-  }   
+  }
     //Relacionado ao login: Pede um token
     getRequestToken(): Observable<any> {
       return this.http.get<any>(`https://api.themoviedb.org/3/authentication/token/new?api_key=dadc0c005ef5db978255b26bb089a811`);
     }
-  
+
     //valida o token e chama a sessão aq
     validateRequestToken(username: string, password: string, requestToken: string): Observable<any> {
       return this.http.post<any>(`https://api.themoviedb.org/3/authentication/token/validate_with_login?api_key=dadc0c005ef5db978255b26bb089a811`, {
@@ -122,11 +123,19 @@ export class TmdbAPIService {
     getSessionID(requestToken: string): Observable<any> {
       return this.http.get<any>(`https://api.themoviedb.org/3/authentication/session/new?api_key=dadc0c005ef5db978255b26bb089a811&request_token=${requestToken}`);
     }
-  
+
     //pega a informação da conta(importante pegar a sessão)
     getAccountInfo(sessionToken: String): Observable<any> {
       return this.http.get<any>(`https://api.themoviedb.org/3/account?api_key=dadc0c005ef5db978255b26bb089a811&session_id=${sessionToken}`);
-  
-  
     }
+
+    getWatchlist(accountId: string, sessionId: string): Observable<apiResult> {
+      return this.http.get<apiResult>(
+        `https://api.themoviedb.org/3/account/${accountId}/watchlist/movies?api_key=dadc0c005ef5db978255b26bb089a811&language=pt-BR&page=1&sort_by=created_at.asc&session_id=${sessionId}`,
+        {
+          headers: new HttpHeaders({
+            'authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkYWRjMGMwMDVlZjVkYjk3ODI1NWIyNmJiMDg5YTgxMSIsInN1YiI6IjY2MDU4MjZkYWFmZWJkMDE4NzE4MWFlMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.NdJbT1FhwcHbbDRaEFjWa0wPWQragEZGevP64C69JHkY'})
+        }
+      );
+  }
 }

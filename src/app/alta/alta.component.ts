@@ -1,6 +1,6 @@
 import { Component, OnInit, } from '@angular/core';
 import { TmdbAPIService } from '../services/tmdb-api.service';
-import { Router } from '@angular/router';
+import { InfiniteScrollCustomEvent } from '@ionic/angular';
 
 
 @Component({
@@ -28,11 +28,18 @@ export class AltaComponent  implements OnInit {
     this.loadMovies();
   }
 
-  async loadMovies(){
+  async loadMovies(event?: InfiniteScrollCustomEvent){
     this.tmdbAPI.getPopularMovies(this.currentPage).subscribe(res => {
       this.movies = [...res.results];
       console.log(res);
-      console.log(this.movies);
+      console.log( this.movies);
+    event?.target.complete();
     });
-  };
+
+  }
+  loadMore(event: InfiniteScrollCustomEvent){
+    this.currentPage++;
+    this.loadMovies(event);
+  }
+
 }

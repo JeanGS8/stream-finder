@@ -1,32 +1,13 @@
-.card{
-  display: flex;
-  max-height: 150px;
+img{
+  border-radius: 6px;
+  max-width:120px;
+  max-height:180px;
+}
 
-  
-  img{
-    width: 150px;
-    height: 150px;
-  }
-  
-  div{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    
-    .title{
-      font-size: 20px;
-    }
-    .conteudo{
-      font-size: 15px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: initial;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 4;
-      max-height: 90px;
-    }
-  }
+ion-card-title{
+  font-size: 23px;
+}
+
+.card {
+  box-shadow: 1px 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra suave */
 }

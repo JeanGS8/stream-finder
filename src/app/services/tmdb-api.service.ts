@@ -128,6 +128,10 @@ export class TmdbAPIService {
     getAccountInfo(sessionToken: String): Observable<any> {
       return this.http.get<any>(`https://api.themoviedb.org/3/account?api_key=dadc0c005ef5db978255b26bb089a811&session_id=${sessionToken}`);
     }
+    //Pegar se um filme está na watchlist
+    getAccountState(movieID?: any, sessionToken?: String): Observable<any> {
+      return this.http.get<any>(`https://api.themoviedb.org/3/movie/${movieID}/account_states?api_key=dadc0c005ef5db978255b26bb089a811&session_id=${sessionToken}  `);
+    }
 
     getWatchlist(accountId: string, sessionId: string): Observable<apiResult> {
       return this.http.get<apiResult>(

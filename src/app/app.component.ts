@@ -52,6 +52,7 @@ export class AppComponent implements OnInit {
   //logout Simples
   logout() {
     localStorage.removeItem('sessionID');
+    localStorage.removeItem('accountID');
     window.location.reload();
   }
 }

@@ -297,6 +297,25 @@
       
       background-color: rgba(0, 0, 0, 0.6);
     }
-  
   }
+}
+.circle ion-icon {
+    font-size: 24px; /* Tamanho do ícone */
+}
+
+
+.circle {
+    width: 50px;             /* Largura do círculo */
+    height: 50px;            /* Altura do círculo (igual à largura para formar um círculo) */
+    background-color: rgba(0, 0, 0, 0.6); /* Cor de fundo do círculo */
+    border-radius: 50%;      /* Define as bordas arredondadas para formar o círculo */
+    display: flex;           /* Utiliza flexbox para centralizar o ícone */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center;     /* Centraliza verticalmente */
+}
+.container {
+    display: flex;           /* Alinha os círculos em uma linha */
+    justify-content: center; /* Centraliza os círculos horizontalmente */
+    align-items: center;     /* Centraliza os círculos verticalmente */
+    gap: 20px;               /* Espaçamento entre os círculos */
 }

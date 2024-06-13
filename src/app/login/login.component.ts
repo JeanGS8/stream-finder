@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { TmdbAPIService } from '../services/tmdb-api.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-login',
@@ -11,16 +13,50 @@ export class LoginComponent {
   password: string = '';
   requestToken: string = '';
   sessionID: string = '';
+  errorMsg: string = '';
   showError: boolean = false;
+  
+  
+  constructor(
+    private tmdbAPI: TmdbAPIService,
+    private afAuth: AngularFireAuth,
+    private firestore: AngularFirestore
+    ) {}
 
+  async createRequestToken() {
+    if (!this.username && !this.password) {
+      this.showError = true;
+      this.errorMsg = 'Por favor, insira seus dados.';
+      return;
+    }
+    else if(!this.username){
+      this.showError = true;
+      this.errorMsg = 'Por favor, insira um nome de usuário.';
+      return;
+    }
+    else if(!this.password){
+      this.showError = true;
+      this.errorMsg = 'Por favor, insira sua senha.';
+      return;
+    }
 
-  constructor(private tmdbAPI: TmdbAPIService) {}
+    try {
+      const userCredential = await this.afAuth.signInAnonymously();
+      const user = userCredential.user;
+      await user?.updateProfile({ displayName: this.username });
+      this.firestore.collection('users').doc(user?.uid).set({username: this.username});
+      console.log('Autenticado anonimamente com Firebase');
 
-  createRequestToken() {
-    this.tmdbAPI.getRequestToken().subscribe(res => {
-      this.requestToken = res.request_token;
-      this.validateRequestToken();
-    });
+      this.tmdbAPI.getRequestToken().subscribe(res => {
+        this.requestToken = res.request_token;
+        this.validateRequestToken();
+      })
+    }
+    catch (error) {
+      this.showError = true;
+      this.errorMsg = 'Erro na autenticação com Firebase';
+    }
+
   }
 
   validateRequestToken() {
@@ -29,7 +65,7 @@ export class LoginComponent {
     }, error => { //Verifica o status do erro, se haver error, ele seta o showError como true
       if (error.status === 400 || error.status === 401) {
         this.showError = true;
-        console.log('errrooooorrr');
+        this.errorMsg = 'Usuário ou senha incorretos.';
       }
     });
   }
@@ -40,7 +76,8 @@ export class LoginComponent {
       this.sessionID = res.session_id;
       console.log('session id: ' + this.sessionID);
       localStorage.setItem('sessionID', this.sessionID);
+      this.showError = false;
       window.location.href = '/home';
     })
-  }
+  }  
 }

@@ -120,12 +120,9 @@ export class TmdbAPIService {
     }
 
     //valida o token e chama a sessão aq
-    validateRequestToken(username: string, password: string, requestToken: string): Observable<any> {
-      return this.http.post<any>(`https://api.themoviedb.org/3/authentication/token/validate_with_login?api_key=${this.key}`, {
-        username,
-        password,
-        request_token: requestToken
-      });
+    validateRequestToken(username: string, password: string, request_token: string): Observable<any> {
+      return this.http.post<any>(`https://api.themoviedb.org/3/authentication/token/validate_with_login?api_key=${this.key}`,
+      {username, password, request_token});
     }
     //chama a sessão
     getSessionID(requestToken: string): Observable<any> {
@@ -141,12 +138,23 @@ export class TmdbAPIService {
       return this.http.get<any>(`https://api.themoviedb.org/3/${tipo}/${id}/account_states?api_key=${this.key}&session_id=${sessionToken}  `);
     }
 
+    postWatchlist(accountId: string, sessionId: string, media_type: string, media_id: string, watchlist: boolean): Observable<apiResult> {
+      return this.http.post<apiResult>(
+        `https://api.themoviedb.org/3/account/${accountId}/watchlist?session_id=${sessionId}`,
+        {media_type, media_id, watchlist},
+        {
+          headers: new HttpHeaders({
+            'authorization': `Bearer ${this.bearer}`})
+        }
+      )
+    }
+
     getWatchlist(accountId: string, sessionId: string): Observable<apiResult> {
       return this.http.get<apiResult>(
         `https://api.themoviedb.org/3/account/${accountId}/watchlist/movies?api_key=${this.key}&language=pt-BR&page=1&sort_by=created_at.asc&session_id=${sessionId}`,
         {
           headers: new HttpHeaders({
-            'authorization': `Bearer ${this.key}`})
+            'authorization': `Bearer ${this.bearer}`})
         }
       );
   }

@@ -83,29 +83,15 @@ export class DadosComponent implements OnInit {
     const previousState = this.account_state.watchlist;
     this.account_state.watchlist = watchlistStatus;
 
-    const options = {
-      method: 'POST',
-      headers: {
-        accept: 'application/json',
-        'content-type': 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkYWRjMGMwMDVlZjVkYjk3ODI1NWIyNmJiMDg5YTgxMSIsInN1YiI6IjY2MDU4MjZkYWFmZWJkMDE4NzE4MWFlMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.NdJbT1FhwcHbbDRaEFjWa0wPWQragEZGevP64C69JHY'
-      },
-      body: JSON.stringify({ media_type: 'movie', media_id: media_id, watchlist: watchlistStatus })
-    };
-
-    fetch(`https://api.themoviedb.org/3/account/${this.accountID}/watchlist?session_id=${this.sessionID}`, options)
-      .then(response => response.json())
-      .then(response => {
-        console.log(response);
-
-        // A requisição foi bem-sucedida, nenhuma ação adicional necessária.
-      })
-      .catch(err => {
-        console.error(err);
-
-        // Reverter a mudança se houve um erro na requisição
-        this.account_state.watchlist = previousState;
-      });
+    
+    this.tmdbAPI.postWatchlist(this.accountID, this.sessionID, this.tipo, media_id, watchlistStatus).subscribe(res => {
+      console.log(res);
+    },
+    err => {
+      console.error(err);
+      // Reverter a mudança se houve um erro na requisição
+      this.account_state.watchlist = previousState;
+    });
   }
 
   async dadosInfo() {

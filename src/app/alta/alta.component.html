@@ -1,7 +1,7 @@
 <ion-content color="primary">
   <ion-card class="card" color="dark" *ngFor="let item of movies">
     <ion-grid fluid>
-      <ion-row tab="dados" routerLink="/dados/{{item.id}}">
+      <ion-row tab="filme" routerLink="/filme/{{item.id}}">
         
         <ion-col size="4" sizeSm="3" sizeMd="2">
           <img src="{{'https://image.tmdb.org/t/p' + '/original' + item.poster_path }}"/>

@@ -28,9 +28,9 @@ export class TmdbAPIService {
     );
   }
 
-  getProviders(id: string): Observable<any> {
+  getProviders(id: string, tipo: string): Observable<any> {
     return this.http.get<apiResult>(
-      `https://api.themoviedb.org/3/movie/${id}/watch/providers`,
+      `https://api.themoviedb.org/3/${tipo}/${id}/watch/providers`,
       {
         headers: new HttpHeaders({
           'authorization': `Bearer ${this.bearer}`
@@ -39,9 +39,9 @@ export class TmdbAPIService {
     );
   }
 
-  getDetails(id: string): Observable<apiResult> {
+  getDetails(id: string, tipo: string): Observable<apiResult> {
     return this.http.get<apiResult>(
-      `https://api.themoviedb.org/3/movie/${id}?language=pt-br`,
+      `https://api.themoviedb.org/3/${tipo}/${id}?language=pt-br`,
       {
         headers: new HttpHeaders({
           'authorization': `Bearer ${this.bearer}`
@@ -50,9 +50,9 @@ export class TmdbAPIService {
     );
   }
 
-  getCredits(id: string): Observable<apiResult> {
+  getCredits(id: string, tipo: string): Observable<apiResult> {
     return this.http.get<apiResult>(
-      `https://api.themoviedb.org/3/movie/${id}/credits?language=pt-br`,
+      `https://api.themoviedb.org/3/${tipo}/${id}/credits?language=pt-br`,
       {
         headers: new HttpHeaders({
           'authorization': `Bearer ${this.bearer}`
@@ -61,9 +61,9 @@ export class TmdbAPIService {
     );
   }
 
-  getVideo(id: string): Observable<apiResult> {
+  getVideo(id: string, tipo: string): Observable<apiResult> {
     return this.http.get<apiResult>(
-      `https://api.themoviedb.org/3/movie/${id}/videos?language=pt-br`,
+      `https://api.themoviedb.org/3/${tipo}/${id}/videos?language=pt-br`,
       {
         headers: new HttpHeaders({
           'authorization': `Bearer ${this.bearer}`
@@ -72,9 +72,9 @@ export class TmdbAPIService {
     );
   }
 
-  getRecomendacao(id: string): Observable<apiResult> {
+  getRecomendacao(id: string, tipo: string): Observable<apiResult> {
     return this.http.get<apiResult>(
-      `https://api.themoviedb.org/3/movie/${id}/recommendations?language=en-US&page=1`,
+      `https://api.themoviedb.org/3/${tipo}/${id}/recommendations?language=en-US&page=1`,
       {
         headers: new HttpHeaders({
           'authorization': `Bearer ${this.bearer}`
@@ -94,6 +94,14 @@ export class TmdbAPIService {
       `https://api.themoviedb.org/3/discover/movie?language=pt-BR&api_key=${this.key}&page=${page}`
     );
   }
+
+  getDiscoverTV(page: number): Observable<apiResult> {
+    return this.http.get<apiResult>(
+      `https://api.themoviedb.org/3/discover/tv?language=pt-BR&api_key=${this.key}&page=${page}`
+    );
+  }
+
+
   getPagesData(): Observable<any> {
     const page1$ = this.getDiscoverMovies(1);
     const page2$ = this.getDiscoverMovies(2);
@@ -129,8 +137,8 @@ export class TmdbAPIService {
       return this.http.get<any>(`https://api.themoviedb.org/3/account?api_key=${this.key}&session_id=${sessionToken}`);
     }
     //Pegar se um filme está na watchlist
-    getAccountState(movieID?: any, sessionToken?: String): Observable<any> {
-      return this.http.get<any>(`https://api.themoviedb.org/3/movie/${movieID}/account_states?api_key=${this.key}&session_id=${sessionToken}  `);
+    getAccountState(id?: any, sessionToken?: String, tipo?: string): Observable<any> {
+      return this.http.get<any>(`https://api.themoviedb.org/3/${tipo}/${id}/account_states?api_key=${this.key}&session_id=${sessionToken}  `);
     }
 
     getWatchlist(accountId: string, sessionId: string): Observable<apiResult> {

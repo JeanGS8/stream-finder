@@ -11,7 +11,7 @@
       *ngFor="let item of movies"
     >
       <ion-grid>
-        <ion-row routerLink="/dados/{{item.id}}">
+        <ion-row routerLink="/filme/{{item.id}}">
     
           <ion-col size="4" sizeSm="3" sizeMd="2">
             <img src="{{'https://image.tmdb.org/t/p' + '/w500' + item.poster_path }}"/>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { TmdbAPIService } from '../services/tmdb-api.service';
 import { ActivatedRoute } from '@angular/router';
 import { register } from 'swiper/element/bundle';
@@ -28,16 +28,41 @@ export class DadosComponent implements OnInit {
   receita: any;
   video: any;
   recomendacao: any;
+  
+  qtdTemporadas: any;
+  status: any;
+  tipo: any;
 
+  screenWidth: any;
 
+  constructor(private tmdbAPI: TmdbAPIService, private route: ActivatedRoute) {
+    this.screenWidth = this.swiperWidth();
+  }
 
-  constructor(private tmdbAPI: TmdbAPIService, private route: ActivatedRoute) {}
+  swiperWidth(){
+    const tamanho = window.innerWidth;
+    console.log('Width da tela:', window.innerWidth);
+
+    if(tamanho < 576) return 3.2;
+    else if(tamanho < 768) return 4.2;
+    else if(tamanho < 992) return 5.2;
+    else return 6.2;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    // Atualize o tamanho da tela quando ocorrer um evento de redimensionamento
+    this.screenWidth = this.swiperWidth();
+  }
 
   ngOnInit() {
     this.dadosInfo();
   }
 
-
+  ionViewWillLeave(){
+    this.credits = [];
+    this.recomendacao = [];
+  }
 
   formatarHoras(duracao: number) {
     const horas = Math.floor(duracao / 60);
@@ -52,88 +77,102 @@ export class DadosComponent implements OnInit {
     return (valor > 0) ? "US$ " + partes[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ',' + partes[1] : "Valor não informado";
   }
 
-
-
-
   //Adicionar e remover da watchlist
-addWatchList(media_id: any, watchlistStatus: boolean) {
-  // Atualize o estado local imediatamente
-  const previousState = this.account_state.watchlist;
-  this.account_state.watchlist = watchlistStatus;
+  addWatchList(media_id: any, watchlistStatus: boolean) {
+    // Atualize o estado local imediatamente
+    const previousState = this.account_state.watchlist;
+    this.account_state.watchlist = watchlistStatus;
 
-  const options = {
-    method: 'POST',
-    headers: {
-      accept: 'application/json',
-      'content-type': 'application/json',
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkYWRjMGMwMDVlZjVkYjk3ODI1NWIyNmJiMDg5YTgxMSIsInN1YiI6IjY2MDU4MjZkYWFmZWJkMDE4NzE4MWFlMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.NdJbT1FhwcHbbDRaEFjWa0wPWQragEZGevP64C69JHY'
-    },
-    body: JSON.stringify({ media_type: 'movie', media_id: media_id, watchlist: watchlistStatus })
-  };
+    const options = {
+      method: 'POST',
+      headers: {
+        accept: 'application/json',
+        'content-type': 'application/json',
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkYWRjMGMwMDVlZjVkYjk3ODI1NWIyNmJiMDg5YTgxMSIsInN1YiI6IjY2MDU4MjZkYWFmZWJkMDE4NzE4MWFlMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.NdJbT1FhwcHbbDRaEFjWa0wPWQragEZGevP64C69JHY'
+      },
+      body: JSON.stringify({ media_type: 'movie', media_id: media_id, watchlist: watchlistStatus })
+    };
 
-  fetch(`https://api.themoviedb.org/3/account/${this.accountID}/watchlist?session_id=${this.sessionID}`, options)
-    .then(response => response.json())
-    .then(response => {
-      console.log(response);
+    fetch(`https://api.themoviedb.org/3/account/${this.accountID}/watchlist?session_id=${this.sessionID}`, options)
+      .then(response => response.json())
+      .then(response => {
+        console.log(response);
 
-      // A requisição foi bem-sucedida, nenhuma ação adicional necessária.
-    })
-    .catch(err => {
-      console.error(err);
+        // A requisição foi bem-sucedida, nenhuma ação adicional necessária.
+      })
+      .catch(err => {
+        console.error(err);
 
-      // Reverter a mudança se houve um erro na requisição
-      this.account_state.watchlist = previousState;
-    });
-}
+        // Reverter a mudança se houve um erro na requisição
+        this.account_state.watchlist = previousState;
+      });
+  }
 
-
-
-
-
-  dadosInfo() {
+  async dadosInfo() {
     this.route.params.subscribe(params => {
 
-    this.sessionID = localStorage.getItem('sessionID') || ''; // Usando operador lógico OR para fornecer um valor padrão vazio se não houver sessionID armazenado
-    console.log('SessionID dentro do dados:', this.sessionID);
-    this.accountID = localStorage.getItem('accountID') || ''; // Usando operador lógico OR para fornecer um valor padrão vazio se não houver sessionID armazenado
-    console.log('accountID dentro do dados:', this.accountID);
+      this.sessionID = localStorage.getItem('sessionID') || ''; // Usando operador lógico OR para fornecer um valor padrão vazio se não houver sessionID armazenado
+      console.log('SessionID dentro do dados:', this.sessionID);
+      this.accountID = localStorage.getItem('accountID') || ''; // Usando operador lógico OR para fornecer um valor padrão vazio se não houver sessionID armazenado
+      console.log('accountID dentro do dados:', this.accountID);
 
-      const movieId = params['id'];
+      const routeConfig = this.route.routeConfig;
+    
+      this.tipo = (routeConfig?.path?.startsWith('filme'))? "movie" : "tv";
+
+      const id = params['id'];
       //recomendacao
-      this.tmdbAPI.getRecomendacao(movieId).subscribe(res => {
+      this.tmdbAPI.getRecomendacao(id, this.tipo).subscribe(res => {
         this.recomendacao = res.results;
         console.log("recomendacao: ");
         console.log(res);
       })
 
-      this.tmdbAPI.getAccountState(movieId, this.sessionID).subscribe(res => {
-        this.account_state = res;
-        console.log(this.account_state);
-
-      })
+      if(this.sessionID){
+        this.tmdbAPI.getAccountState(id, this.sessionID, this.tipo).subscribe(res => {
+          this.account_state = res;
+          console.log(this.account_state);
+        })
+      }
 
 
       //nome dos atores
-      this.tmdbAPI.getCredits(movieId).subscribe(res => {
+      this.tmdbAPI.getCredits(id, this.tipo).subscribe(res => {
         this.credits = res;
         console.log("credits: ");
         console.log(res);
       })
 
       //dados dos filmes
-      this.tmdbAPI.getDetails(movieId).subscribe(res => {
+      this.tmdbAPI.getDetails(id, this.tipo).subscribe(res => {
         this.details = res;
         console.log("Details: ");
         console.log(res);
 
-        this.data = this.details?.release_date.replace(/-/g, '/');
-        this.duracao = this.formatarHoras(this.details?.runtime);
-        this.orcamento = this.formatarValor(this.details?.budget);
-        this.receita = this.formatarValor(this.details?.revenue);
+        if(this.tipo == "movie"){
+          this.data = this.details?.release_date.replace(/-/g, '/');
+          this.duracao = this.formatarHoras(this.details?.runtime);
+          this.orcamento = this.formatarValor(this.details?.budget);
+          this.receita = this.formatarValor(this.details?.revenue);
+        }
+        else{
+          this.data = this.details?.first_air_date.replace(/-/g, '/');
+          this.qtdTemporadas = this.details?.seasons.length;
+          this.qtdTemporadas += (this.qtdTemporadas == 1)? " temporada" : " temporadas"; 
+          if(this.details?.status == "Canceled"){
+            this.status = "cancelada";
+          }
+          else if(this.details?.status == "Ended"){
+            this.status = "finalizada";
+          }
+          else if(this.details?.status == "Returning Series"){
+            this.status = "em produção";
+          };
+        }
       })
 
       //trailer do filme
-      this.tmdbAPI.getVideo(movieId).subscribe(res => {
+      this.tmdbAPI.getVideo(id, this.tipo).subscribe(res => {
 
         if (res.results[0] != undefined) {
           console.log("true");
@@ -144,7 +183,7 @@ addWatchList(media_id: any, watchlistStatus: boolean) {
 
 
       // onde assistir
-      this.tmdbAPI.getProviders(movieId).subscribe(res => {
+      this.tmdbAPI.getProviders(id, this.tipo).subscribe(res => {
         this.stream = res.results;
         console.log("STREAM");
         console.log(res.results);

@@ -40,9 +40,13 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: 'dados/:id',
+    path: 'filme/:id',
     component: DadosComponent
-  }
+  },
+  {
+    path: 'serie/:id',
+    component: DadosComponent
+  },
 ];
 
 @NgModule({
@@ -53,7 +57,7 @@ const routes: Routes = [
     ProcurarModule,
     ListaModule,
     LoginModule,
-    DadosModule
+    DadosModule,
   ],
   exports: [RouterModule]
 })

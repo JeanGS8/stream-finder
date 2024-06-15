@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { TmdbAPIService } from '../services/tmdb-api.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +19,6 @@ export class LoginComponent {
   constructor(
     private tmdbAPI: TmdbAPIService,
     private afAuth: AngularFireAuth,
-    private firestore: AngularFirestore
     ) {}
 
   async createRequestToken() {
@@ -41,11 +39,10 @@ export class LoginComponent {
     }
 
     try {
-      const userCredential = await this.afAuth.signInAnonymously();
-      const user = userCredential.user;
-      await user?.updateProfile({ displayName: this.username });
-      this.firestore.collection('users').doc(user?.uid).set({username: this.username});
-      console.log('Autenticado anonimamente com Firebase');
+      await this.afAuth.signInAnonymously()
+      .then(response => {
+        console.log('Autenticado anonimamente com Firebase');
+      });
 
       this.tmdbAPI.getRequestToken().subscribe(res => {
         this.requestToken = res.request_token;

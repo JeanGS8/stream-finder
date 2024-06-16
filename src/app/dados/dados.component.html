@@ -108,13 +108,13 @@
 
     <ion-row>
       <ion-col size="12" class="container">
-        <div class="circle"> <ion-icon name="heart-outline"></ion-icon></div>
+        <div class="circle" *ngIf="account_state?.favorite == false" (click)="addFavorite(details.id, true)"> <ion-icon name="heart-outline"></ion-icon></div>
 
+        <div class="circle" *ngIf="account_state?.favorite == true" (click)="addFavorite(details.id, false)"> <ion-icon name="heart"></ion-icon></div>
 
         <div class="circle" *ngIf="account_state?.watchlist == false" (click)="addWatchList(details.id, true)"><ion-icon name="bookmark-outline" class="bookmark"></ion-icon></div>
         <div class="circle" *ngIf="account_state?.watchlist == true"  (click)="addWatchList(details.id, false)"><ion-icon name="bookmark"></ion-icon></div>
         
-        <div class="circle"> <ion-icon name="add-circle-outline"></ion-icon> </div>
       </ion-col>
     </ion-row>
 

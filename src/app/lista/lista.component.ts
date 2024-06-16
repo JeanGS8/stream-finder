@@ -10,8 +10,8 @@ export class ListaComponent implements OnInit {
   public accountID: string = '';
   public sessionID: string = '';
   public movies: any[] = [];
+  public tv: any[] = [];
   public account_state: any;
-
   constructor(private tmdbAPI: TmdbAPIService) {}
 
   ngOnInit() {
@@ -21,7 +21,8 @@ export class ListaComponent implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.showWatchList();
+    this.showMovieWatchList();
+    this.showTvWatchlist();
   }
 
   getSessionIDFromLocalStorage() {
@@ -34,54 +35,52 @@ export class ListaComponent implements OnInit {
   }
 
   //FEITO SOMENTE PRA PEGAR A WATCHLISTA DO INDIVIDUO
-  showWatchList() {
+  showMovieWatchList() {
     if (this.accountID.length > 0 && this.sessionID.length > 0) {
-      this.tmdbAPI.getWatchlist(this.accountID, this.sessionID).subscribe(res => {
+      this.tmdbAPI.getWatchlist(this.accountID, this.sessionID, 'movies' ).subscribe(res => {
         this.movies = [...res.results];
-
         console.log("Filmes na lista:");
         console.log(this.movies);
       })
     } else {
       console.log("Lista: Usuario não logado");
     }
-
   }
+
+  showTvWatchlist() {
+    if (this.accountID.length > 0 && this.sessionID.length > 0) {
+      this.tmdbAPI.getWatchlist(this.accountID, this.sessionID, 'tv' ).subscribe(res => {
+        this.tv = [...res.results];
+        console.log("Series na lista:");
+        console.log(this.tv);
+      })
+    } else {
+      console.log("Lista: Usuario não logado");
+    }
+  }
+
 
 
   showAccountState(){
-      this.tmdbAPI.getAccountState(this.movies , this.sessionID).subscribe(res => {
-        this.account_state = res;
-        console.log(this.account_state);
-      })
+    this.tmdbAPI.getAccountState(this.movies , this.sessionID).subscribe(res => {
+      this.account_state = res;
+      console.log(this.account_state);
+    })
   }
 
 
-  addWatchList(media_id: any, watchlistStatus: boolean) {
+  addWatchList(tipo: any ,media_id: any, watchlistStatus: boolean) {
     // Atualize o estado local imediatamente
 
-    const options = {
-      method: 'POST',
-      headers: {
-        accept: 'application/json',
-        'content-type': 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkYWRjMGMwMDVlZjVkYjk3ODI1NWIyNmJiMDg5YTgxMSIsInN1YiI6IjY2MDU4MjZkYWFmZWJkMDE4NzE4MWFlMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.NdJbT1FhwcHbbDRaEFjWa0wPWQragEZGevP64C69JHY'
-      },
-      body: JSON.stringify({ media_type: 'movie', media_id: media_id, watchlist: watchlistStatus })
-    };
-
-    fetch(`https://api.themoviedb.org/3/account/${this.accountID}/watchlist?session_id=${this.sessionID}`, options)
-      .then(response => response.json())
-      .then(response => {
-        console.log(response);
-        location.reload();
-        // A requisição foi bem-sucedida, nenhuma ação adicional necessária.
-      })
-      .catch(err => {
-        console.error(err);
-
-        // Reverter a mudança se houve um erro na requisição
-      });
+    this.tmdbAPI.postWatchlist(this.accountID, this.sessionID, tipo, media_id, watchlistStatus).subscribe(res => {
+      console.log(res);
+      location.reload();
+      // A requisição foi bem-sucedida, nenhuma ação adicional necessária.
+    },
+    err => {
+      console.error(err);
+      // Reverter a mudança se houve um erro na requisição
+    });
   }
 
 

@@ -22,9 +22,9 @@ export class TmdbAPIService {
 
   constructor(private http: HttpClient) { }
 
-  getSearchMovies(name: string, page: number): Observable<apiResult> {
+  getSearchMoviesAndTv(name: string, page: number): Observable<apiResult> {
     return this.http.get<apiResult>(
-      `https://api.themoviedb.org/3/search/movie?query=${name}&include_adult=false&language=pt-BR&api_key=${this.key}&page=${page}`
+      `https://api.themoviedb.org/3/search/multi?query=${name}&include_adult=false&language=pt-BR&api_key=${this.key}&page=${page}`
     );
   }
 
@@ -89,6 +89,13 @@ export class TmdbAPIService {
     );
   }
 
+
+  getPopularTV(page: number): Observable<apiResult> {
+    return this.http.get<apiResult>(
+      `https://api.themoviedb.org/3/tv/popular?api_key=${this.key}&page=${page}`
+    );
+  }
+
   getDiscoverMovies(page: number): Observable<apiResult> {
     return this.http.get<apiResult>(
       `https://api.themoviedb.org/3/discover/movie?language=pt-BR&api_key=${this.key}&page=${page}`
@@ -149,9 +156,22 @@ export class TmdbAPIService {
       )
     }
 
-    getWatchlist(accountId: string, sessionId: string): Observable<apiResult> {
+    //Criei um Favorite, pois eu acho mais intuitivo :thinking:
+    postFavorite(accountId: string, sessionId: string, media_type: string, media_id: string, favorite: boolean): Observable<apiResult> {
+      return this.http.post<apiResult>(
+        `https://api.themoviedb.org/3/account/${accountId}/favorite?session_id=${sessionId}`,
+        {media_type, media_id, favorite},
+        {
+          headers: new HttpHeaders({
+            'authorization': `Bearer ${this.bearer}`})
+        }
+      )
+    }
+
+
+    getWatchlist(accountId: string, sessionId: string, media_type: string): Observable<apiResult> {
       return this.http.get<apiResult>(
-        `https://api.themoviedb.org/3/account/${accountId}/watchlist/movies?api_key=${this.key}&language=pt-BR&page=1&sort_by=created_at.asc&session_id=${sessionId}`,
+        `https://api.themoviedb.org/3/account/${accountId}/watchlist/${media_type}?api_key=${this.key}&language=pt-BR&page=1&sort_by=created_at.asc&session_id=${sessionId}`,
         {
           headers: new HttpHeaders({
             'authorization': `Bearer ${this.bearer}`})

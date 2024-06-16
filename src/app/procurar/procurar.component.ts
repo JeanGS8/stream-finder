@@ -8,16 +8,14 @@ import { TmdbAPIService } from '../services/tmdb-api.service';
 })
 export class ProcurarComponent  implements OnInit {
   public texto: string = "";
-  public movies: any = "";
+  public moviesAndTV: any = "";
 
   constructor(private tmdbAPI: TmdbAPIService) {}
 
   getMovie(){
-    this.movies = this.tmdbAPI.getSearchMovies(this.texto, 1).subscribe(res => {
-      this.movies = [...res.results];
+    this.tmdbAPI.getSearchMoviesAndTv(this.texto, 1).subscribe(res => {
+      this.moviesAndTV = res.results.filter(item => item.media_type !== "person");
     });
-
-    console.log(this.movies);
   }
   async ngOnInit() {}
 

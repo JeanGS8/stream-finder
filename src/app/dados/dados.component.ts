@@ -94,6 +94,26 @@ export class DadosComponent implements OnInit {
     });
   }
 
+  addFavorite(media_id: any, favoriteStatus: boolean) {
+    // Atualize o estado local imediatamente
+    const previousState = this.account_state.favorite;
+    this.account_state.favorite = favoriteStatus;
+
+
+    this.tmdbAPI.postFavorite(this.accountID, this.sessionID, this.tipo, media_id, favoriteStatus).subscribe(res => {
+      console.log(res);
+    },
+    err => {
+      console.error(err);
+      // Reverter a mudança se houve um erro na requisição
+      this.account_state.favorite = previousState;
+    });
+  }
+
+
+
+
+
   async dadosInfo() {
     this.route.params.subscribe(params => {
 

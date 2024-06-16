@@ -10,8 +10,10 @@ import { InfiniteScrollCustomEvent } from '@ionic/angular';
 
 })
 
-export class AltaComponent  implements OnInit {
+export class AltaComponent implements OnInit {
   movies: any[] = []; //Armazena o resultado do getPopularMovie
+  tv: any[] = [];
+
   currentPage = 1; //Passível de paginação
 
 
@@ -28,16 +30,26 @@ export class AltaComponent  implements OnInit {
     this.loadMovies();
   }
 
-  async loadMovies(event?: InfiniteScrollCustomEvent){
+  async loadMovies(event?: InfiniteScrollCustomEvent) {
     this.tmdbAPI.getPopularMovies(this.currentPage).subscribe(res => {
       this.movies = [...res.results];
-      console.log(res);
-      console.log( this.movies);
-    event?.target.complete();
+      this.loadTV();
+      event?.target.complete();
     });
-
   }
-  loadMore(event: InfiniteScrollCustomEvent){
+
+
+  async loadTV() {
+    this.tmdbAPI.getPopularTV(this.currentPage).subscribe(res => {
+      this.tv = [...res.results];
+      console.log(this.tv);
+    });
+  }
+
+
+
+
+  loadMore(event: InfiniteScrollCustomEvent) {
     this.currentPage++;
     this.loadMovies(event);
   }
